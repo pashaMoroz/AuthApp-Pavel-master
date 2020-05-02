@@ -28,25 +28,25 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        signInButton.isEnabled = false
-        signInButton.alpha = 0.5
+        signInButton.isEnabled = true
+        signInButton.alpha = 1
     }
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
 
-        var isEmalValidate = false
-        if let email = emailTextField.text {
-        isEmalValidate = validateEmail(enteredEmail: email)
-        }
-
-        if firstNameTextField.text != "" && lastNameTextField.text != "" && passwordTextField.text != "" && isEmalValidate {
-
-            signInButton.isEnabled = true
-            signInButton.alpha = 1
-        } else {
-            signInButton.isEnabled = false
-            signInButton.alpha = 0.5
-        }
+//        var isEmalValidate = false
+//        if let email = emailTextField.text {
+//        isEmalValidate = validateEmail(enteredEmail: email)
+//        }
+//
+//        if firstNameTextField.text != "" && lastNameTextField.text != "" && passwordTextField.text != "" && isEmalValidate {
+//
+//            signInButton.isEnabled = true
+//            signInButton.alpha = 1
+//        } else {
+//            signInButton.isEnabled = false
+//            signInButton.alpha = 0.5
+//        }
 
         return true
     }
@@ -63,12 +63,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func registerTapped(_ sender: UIButton) {
-        guard let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC") as? ProfileViewController else { return }
-        profileVC.signUpViewController = self
-        profileVC.firstname = firstNameTextField.text
-        profileVC.lastname = lastNameTextField.text
-        profileVC.image = photoImageView.image
-        present(profileVC, animated: true, completion: nil)
+        let mainTabBarVC = MainTabBarController()
+
+        mainTabBarVC.modalPresentationStyle = .fullScreen
+        present(mainTabBarVC, animated: true, completion: nil)
     }
 
 
